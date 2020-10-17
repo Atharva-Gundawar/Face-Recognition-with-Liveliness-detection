@@ -1,7 +1,10 @@
 # Project Title
 
 Attendance With Liveliness Detection
-
+## How to start 
+```
+Open terminal and run python3 Attendance-With-Liveliness-Detection/frwithvideo.py
+```
 ## Abstract
 
 The aim of this project is to automate the process of taking attendance in various educational institutions. With the help of this project, one can get their attendance marked by simply facing a camera. Their details - name, time of arrival, date, and registration number will be automatically stored in a .csv file. 
