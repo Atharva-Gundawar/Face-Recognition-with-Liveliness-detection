@@ -9,7 +9,20 @@ import argparse
 import imutils
 import pickle
 import time
+from datetime import datetime 
 
+def markAttendance(name):
+  with open('./attendance.csv', 'r+') as f:
+    myDataList = f.readlines()
+    nameList = []
+    for line in myDataList:
+      entry = line.split(',')
+      nameList.append(entry[0])
+    if name not in nameList:
+        now = datetime.now()
+        time = now.strftime('%X')
+        date = now.strftime('%x')
+        f.writelines(f'\n{name},{date},{time}')
 
 KNOWN_FACES_DIR = 'known_faces'
 TOLERANCE = 0.6
@@ -66,6 +79,7 @@ while True:
         if True in results:  # If at least one is true, get a name of first of found labels
             match = known_names[results.index(True)]
             # print(f' - {match} from {results}')
+
             top_left = (face_location[3], face_location[0])
             bottom_right = (face_location[1], face_location[2])
             color = name_to_color(match)
@@ -84,10 +98,7 @@ while True:
             label = le.classes_[j]
             print(preds[j])
             if str(label) == "real":
-                label = "fake"
-            else:
-                label = "real"
-
+                markAttendance(str(match))
 
             top_left = (face_location[3], face_location[2])
             bottom_right = (face_location[1], face_location[2] + 22)
