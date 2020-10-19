@@ -66,7 +66,8 @@ le = pickle.loads(open("le.pickle", "rb").read())
 print("[INFO] starting video stream...")
 
 video =cv2.VideoCapture(0)
-
+frameNum = 0
+maxFrames = 5
 while True:
 
     ret,image = video.read()
@@ -97,13 +98,21 @@ while True:
             j = np.argmax(preds)
             label = le.classes_[j]
             print(preds[j])
-            if str(label) == "real":
+
+            if frameNum<maxFrames : 
+                if label == "real":
+                    frameNum+=1
+                else:
+                    frameNum = 0
+            else:
                 markAttendance(str(match))
+                frameNum = 0
+
 
             top_left = (face_location[3], face_location[2])
             bottom_right = (face_location[1], face_location[2] + 22)
             cv2.rectangle(image, top_left, bottom_right, color, cv2.FILLED)
-            cv2.putText(image, label+match, (face_location[3] + 10, face_location[2] + 15), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (200, 200, 200), FONT_THICKNESS)
+            cv2.putText(image, label+match+str(frameNum), (face_location[3] + 10, face_location[2] + 15), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (200, 200, 200), FONT_THICKNESS)
     cv2.imshow("filename", image)
     if cv2.waitKey(1) & 0xFF ==ord("q"):
         break
