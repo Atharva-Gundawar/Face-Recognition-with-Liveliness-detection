@@ -6,7 +6,7 @@ import matplotlib
 matplotlib.use("Agg")
 
 # import the necessary packages
-from pyimagesearch.livenessnet import LivenessNet
+from livelinessModel.livenessnet import LivenessNet
 from sklearn.preprocessing import LabelEncoder
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import classification_report
