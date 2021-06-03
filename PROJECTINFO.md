@@ -1,7 +1,4 @@
-
-# Product Name
-
-> Short blurb about what your product does.
+# Attendance With Liveliness Detection
 
 ## File Structure
 
