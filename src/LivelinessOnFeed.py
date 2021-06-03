@@ -84,7 +84,7 @@ while True:
             top_left = (face_location[3], face_location[0])
             bottom_right = (face_location[1], face_location[2])
             color = name_to_color(match)
-            print(face_location)
+
             cv2.rectangle(image, top_left, bottom_right, color, FRAME_THICKNESS)
             crop_img = image[face_location[0]:face_location[2], face_location[3]:face_location[1]]
             crop_img = cv2.resize(crop_img, (32, 32))
@@ -108,12 +108,14 @@ while True:
                 markAttendance(str(match))
                 frameNum = 0
 
-
             top_left = (face_location[3], face_location[2])
             bottom_right = (face_location[1], face_location[2] + 22)
             cv2.rectangle(image, top_left, bottom_right, color, cv2.FILLED)
             cv2.putText(image, label+match+str(frameNum), (face_location[3] + 10, face_location[2] + 15), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (200, 200, 200), FONT_THICKNESS)
-    cv2.imshow("filename", image)
+    
+    cv2.imshow("output", image)
+
     if cv2.waitKey(1) & 0xFF ==ord("q"):
         break
+
 cv2.destroyAllWindows()
